@@ -1,0 +1,194 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{enumitem}
+
+\sisetup{per-mode=symbol}
+
+\setlength{\parskip}{0.8ex}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\title{Lab -- Module 4 -- PHYS 131\\[0.5em]Work and Energy Conservation}
+\date{}
+\maketitle
+
+\textbf{Student Name:} {{ student_name }}\\
+\textbf{Date:} {{ date }}\\
+\textbf{Lab Section:} {{ section }}\\[1em]
+
+\section*{Introduction}
+
+The Work–Energy Theorem states:
+\[
+W_{\text{net}} = \Delta K = \frac{1}{2} m v_f^2 - \frac{1}{2} m v_i^2.
+\]
+
+When no non-conservative forces (like friction) do work, mechanical energy is conserved:
+\[
+K_i + U_i = K_f + U_f.
+\]
+
+In this experiment, a cart rolls down an incline. As it descends, gravitational potential energy is converted into kinetic energy. By measuring the cart’s speed at the bottom of the incline, you can compare theoretical and measured values to determine how closely the system follows energy conservation.
+
+\subsubsection*{Theoretical Model}
+
+For a cart starting from rest at height $h$:
+
+\[
+U_i = mgh, \qquad K_i = 0.
+\]
+
+Ideal (no-loss) prediction:
+\[
+mgh = \frac{1}{2}mv_f^2 \quad \Rightarrow \quad v_{f,\text{theory}} = \sqrt{2gh}.
+\]
+
+You will compare this to the measured velocity:
+\[
+v_{f,\text{exp}} = \frac{d}{t},
+\]
+where $d$ is the horizontal distance traveled after leaving the incline and $t$ is the measured time.
+
+\section*{Procedure}
+
+\begin{enumerate}[label=\arabic*.]
+
+    \item Measure the mass of the cart, $m$, and record it in the Data Section.
+
+    \item Set the incline to Height 1 using blocks, books, or stands. Measure the vertical height $h_1$ from the tabletop to the start of the incline. Record this value.
+
+    \item Mark a horizontal distance $d$ on the table from the bottom of the ramp. You will time the cart as it travels this distance after leaving the incline.
+
+    \item Release the cart from rest at the top of the incline. As soon as it reaches the bottom and begins rolling horizontally, start timing. Stop timing when the front of the cart reaches the marked distance $d$.
+
+    \item Repeat three times for Height 1 and record all times.
+
+    \item Compute:
+    \[
+    v_{f,\text{exp}} = \frac{d}{t} \qquad\text{and}\qquad v_{f,\text{theory}} = \sqrt{2 g h_1}.
+    \]
+
+    \item Repeat Steps 2–6 for two additional ramp heights: Height 2 and Height 3.
+
+    \item Compare experimental and theoretical velocities and discuss energy losses.
+
+\end{enumerate}
+
+\section*{Data}
+
+\subsection*{Cart Mass}
+\textbf{Cart mass:} {{ cart.mass }} kg
+
+%========================
+% HEIGHT 1
+%========================
+
+\subsection*{Height 1: {{ h1.height }}}
+
+\begin{center}
+\textbf{Table 1}
+\end{center}
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+\begin{tabular}{c}Horizontal\\Distance $d$ (m)\end{tabular} &
+\begin{tabular}{c}Time\\(s)\end{tabular} &
+\begin{tabular}{c}Experimental\\Velocity (m/s)\end{tabular} &
+\begin{tabular}{c}Theoretical\\Velocity (m/s)\end{tabular} \\
+\midrule
+{% for row in h1.rows %}
+{{ row.d }} & {{ row.t }} & {{ row.vexp }} & {{ h1.vtheory }} \\
+{% endfor %}
+\midrule
+\textbf{Averages:} & {{ h1.avg.t }} & {{ h1.avg.vexp }} & {{ h1.vtheory }} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{1ex}
+
+\textbf{Example calculation using average values:}\\
+{{ h1.example_calculation }}
+
+%========================
+% HEIGHT 2
+%========================
+
+\subsection*{Height 2: {{ h2.height }}}
+
+\begin{center}
+\textbf{Table 2}
+\end{center}
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+\begin{tabular}{c}Horizontal\\Distance $d$ (m)\end{tabular} &
+\begin{tabular}{c}Time\\(s)\end{tabular} &
+\begin{tabular}{c}Experimental\\Velocity (m/s)\end{tabular} &
+\begin{tabular}{c}Theoretical\\Velocity (m/s)\end{tabular} \\
+\midrule
+{% for row in h2.rows %}
+{{ row.d }} & {{ row.t }} & {{ row.vexp }} & {{ h2.vtheory }} \\
+{% endfor %}
+\midrule
+\textbf{Averages:} & {{ h2.avg.t }} & {{ h2.avg.vexp }} & {{ h2.vtheory }} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%========================
+% HEIGHT 3
+%========================
+
+\subsection*{Height 3: {{ h3.height }}}
+
+\begin{center}
+\textbf{Table 3}
+\end{center}
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+\begin{tabular}{c}Horizontal\\Distance $d$ (m)\end{tabular} &
+\begin{tabular}{c}Time\\(s)\end{tabular} &
+\begin{tabular}{c}Experimental\\Velocity (m/s)\end{tabular} &
+\begin{tabular}{c}Theoretical\\Velocity (m/s)\end{tabular} \\
+\midrule
+{% for row in h3.rows %}
+{{ row.d }} & {{ row.t }} & {{ row.vexp }} & {{ h3.vtheory }} \\
+{% endfor %}
+\midrule
+\textbf{Averages:} & {{ h3.avg.t }} & {{ h3.avg.vexp }} & {{ h3.vtheory }} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Questions}
+
+\begin{enumerate}[label=\arabic*.]
+    \item How does increasing the starting height affect the theoretical velocity of the cart?\\[0.3em]
+    \textbf{Answer:} {{ q1 }}
+
+    \item Are the experimental velocities consistently lower than the theoretical values? Why might this occur?\\[0.3em]
+    \textbf{Answer:} {{ q2 }}
+
+    \item Identify at least two non-conservative forces or effects that cause energy loss in this experiment.\\[0.3em]
+    \textbf{Answer:} {{ q3 }}
+
+    \item Does doubling the height double the velocity? Explain using energy relationships.\\[0.3em]
+    \textbf{Answer:} {{ q4 }}
+
+    \item If friction were eliminated, what would you expect about the relationship between measured and predicted velocities?\\[0.3em]
+    \textbf{Answer:} {{ q5 }}
+\end{enumerate}
+
+\end{document}

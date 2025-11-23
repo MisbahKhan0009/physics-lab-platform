@@ -1,0 +1,196 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{enumitem}
+
+\sisetup{per-mode=symbol}
+
+\setlength{\parskip}{0.8ex}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\title{Lab -- Module 3 -- PHYS 131\\[0.5em]Newton's Second Law}
+\date{}
+\maketitle
+
+\textbf{Student Name:} {{ student_name }}\\
+\textbf{Date:} {{ date }}\\
+\textbf{Lab Section:} {{ section }}\\[1em]
+
+\section*{Introduction}
+
+Newton's Second Law describes the relationship between net force, mass, and acceleration:
+\[
+\vec{F}_{\text{net}} = m \vec{a}
+\]
+
+In straight-line motion (1D motion), this reduces to:
+\[
+F_{\text{net}} = ma
+\]
+
+This experiment uses a cart on a track pulled by a hanging mass. The falling mass provides a nearly constant force, allowing you to measure the cart's acceleration and compare it with values predicted using Newton's Second Law.
+
+\subsubsection*{Theoretical Model}
+
+Consider a cart of mass $m_c$ on a horizontal track connected via a string to a hanging mass $m_h$. Neglecting friction:
+
+\[
+F_{\text{net}} = m_h g
+\]
+
+The total mass being accelerated is:
+\[
+m_{\text{total}} = m_c + m_h
+\]
+
+Thus, the expected (theoretical) acceleration is:
+\[
+a_{\text{theory}} = \frac{m_h g}{m_c + m_h}
+\]
+
+You will measure the actual (experimental) acceleration using timing data and compare the two.
+
+\section*{Procedure}
+
+\begin{enumerate}[label=\arabic*.]
+    \item Measure the mass of the cart, $m_c$. Record this value in the Data Section.
+
+    \item Measure the hanging mass $m_h$ for Trial Set 1 and record it.
+
+    \item Set up the track so it is level. Attach the hanging mass to the cart using the string and pulley system.
+
+    \item Pull the cart back slightly and release it from rest. Measure the time it takes to travel a known distance along the track. Repeat three times and record your three time measurements.
+
+    \item Compute the cart's experimental acceleration for each trial using
+    \[
+    a_{\text{exp}} = \frac{2d}{t^2}
+    \]
+
+    \item Compute the theoretical acceleration using
+    \[
+    a_{\text{theory}} = \frac{m_h g}{m_c + m_h}
+    \]
+
+    \item Repeat Steps 2–6 for two additional hanging masses.
+
+    \item Compare the experimental values to theoretical predictions and discuss possible sources of error.
+\end{enumerate}
+
+\section*{Data}
+
+\subsection*{Cart Mass}
+\textbf{Cart mass:} {{ cart.mass }} kg
+
+%========================
+% TRIAL SET 1
+%========================
+
+\subsection*{Trial Set 1: Hanging Mass {{ set1.mh }} kg}
+
+\begin{center}
+\textbf{Table 1}
+\end{center}
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+\begin{tabular}{c}Distance\\$d$ (m)\end{tabular} &
+\begin{tabular}{c}Time\\(s)\end{tabular} &
+\begin{tabular}{c}Experimental\\Acceleration (m/s$^2$)\end{tabular} &
+\begin{tabular}{c}Theoretical\\Acceleration (m/s$^2$)\end{tabular} \\
+\midrule
+{% for row in set1.rows %}
+{{ row.d }} & {{ row.t }} & {{ row.aexp }} & {{ set1.atheory }} \\
+{% endfor %}
+\midrule
+\textbf{Averages:} & {{ set1.avg.t }} & {{ set1.avg.aexp }} & {{ set1.atheory }} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{1ex}
+
+\textbf{Example calculation using average values:}\\
+{{ set1.example_calculation }}
+
+%========================
+% TRIAL SET 2
+%========================
+
+\subsection*{Trial Set 2: Hanging Mass {{ set2.mh }} kg}
+
+\begin{center}
+\textbf{Table 2}
+\end{center}
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+\begin{tabular}{c}Distance\\$d$ (m)\end{tabular} &
+\begin{tabular}{c}Time\\(s)\end{tabular} &
+\begin{tabular}{c}Experimental\\Acceleration (m/s$^2$)\end{tabular} &
+\begin{tabular}{c}Theoretical\\Acceleration (m/s$^2$)\end{tabular} \\
+\midrule
+{% for row in set2.rows %}
+{{ row.d }} & {{ row.t }} & {{ row.aexp }} & {{ set2.atheory }} \\
+{% endfor %}
+\midrule
+\textbf{Averages:} & {{ set2.avg.t }} & {{ set2.avg.aexp }} & {{ set2.atheory }} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%========================
+% TRIAL SET 3
+%========================
+
+\subsection*{Trial Set 3: Hanging Mass {{ set3.mh }} kg}
+
+\begin{center}
+\textbf{Table 3}
+\end{center}
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+\begin{tabular}{c}Distance\\$d$ (m)\end{tabular} &
+\begin{tabular}{c}Time\\(s)\end{tabular} &
+\begin{tabular}{c}Experimental\\Acceleration (m/s$^2$)\end{tabular} &
+\begin{tabular}{c}Theoretical\\Acceleration (m/s$^2$)\end{tabular} \\
+\midrule
+{% for row in set3.rows %}
+{{ row.d }} & {{ row.t }} & {{ row.aexp }} & {{ set3.atheory }} \\
+{% endfor %}
+\midrule
+\textbf{Averages:} & {{ set3.avg.t }} & {{ set3.avg.aexp }} & {{ set3.atheory }} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Questions}
+
+\begin{enumerate}[label=\arabic*.]
+    \item How does changing the hanging mass affect the net force in the system?\\
+    \textbf{Answer:} {{ q1 }}
+
+    \item How does increasing the total mass of the system affect its acceleration?\\
+    \textbf{Answer:} {{ q2 }}
+
+    \item Compare the experimental and theoretical accelerations. Were they close? Explain possible differences.\\
+    \textbf{Answer:} {{ q3 }}
+
+    \item Identify two sources of experimental error in this setup.\\
+    \textbf{Answer:} {{ q4 }}
+
+    \item If friction were not negligible, how would this affect the acceleration? (Increase, decrease, or stay the same. Explain.)\\
+    \textbf{Answer:} {{ q5 }}
+\end{enumerate}
+
+\end{document}

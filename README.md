@@ -4,43 +4,76 @@ A web-based interactive physics laboratory platform for running, visualizing, an
 
 ## 🚀 Getting Started: Installation & Running the Project
 
-### 1. Clone the Repository
+### 1) Clone the Repository
+
 ```bash
 git clone https://github.com/imusa007/physics-lab-platform.git
 cd physics-lab-platform
 ```
 
-### 2. Create and Activate the Conda Environment
+### 2) Option A — Using Conda (recommended)
+
 ```bash
 conda create -n physics-lab python=3.11 -y
 conda activate physics-lab
 ```
 
-### 3. Install Dependencies
+Install project dependencies (both backend & frontend):
+
 ```bash
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
+pip install -r frontend/requirements.txt
 ```
 
-### 4. Run the Backend
+Install Pandoc (LaTeX → HTML) and optional Tectonic (PDF compiler):
+
 ```bash
+conda install -c conda-forge pandoc -y
+conda install -c conda-forge tectonic -y  # optional but recommended
+```
+
+### 2) Option B — Using Python venv (Windows/macOS/Linux)
+
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r backend\requirements.txt
+pip install -r frontend\requirements.txt
+```
+
+Install Pandoc (required) + Tectonic (optional):
+
+- Winget: `winget install JohnMacFarlane.Pandoc` and `winget install Tectonic.Tectonic`
+- Chocolatey: `choco install pandoc -y` and `choco install tectonic -y`
+- Manual downloads: <https://pandoc.org/installing.html> and <https://tectonic-typesetting.github.io/en-US/>
+
+### 3) Run the Backend (Flask)
+
+```bash
+cd backend
 python app.py
 ```
 
-### 5. Run the Frontend
+### 4) Run the Frontend (Streamlit)
+
 ```bash
+cd frontend
 streamlit run app.py
 ```
 
-### 6. Access the Application
-Backend will be available at:
-```
-http://localhost:8000
-```
+### 5) Access the Application
 
-Frontend will be available at:
-```
-http://localhost:8501
-```
+- Backend: `http://localhost:5001`
+- Frontend: `http://localhost:8501`
+
+If Streamlit shows “Could not connect…”, confirm the backend terminal is running and Pandoc is installed.
+
+### Adding a New Lab (.tex)
+
+1. Create a folder under `backend/labs/` (for example, `backend/labs/lab5`).
+2. Add the LaTeX file you want rendered. The backend looks for `instructions.tex`, `lab.tex`, `content.tex`, or the first `.tex` file alphabetically.
+3. (Optional) Drop a `template.tex` in the same folder to control PDF output placeholders.
+4. Restart the backend (`python backend/app.py`). The new lab will automatically appear in the frontend dropdown and render using the same pipeline as existing labs.
 
 ---
 
