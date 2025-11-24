@@ -62,6 +62,23 @@ answers["student_name"] = student_name
 section = st.text_input("Section", value=get_answer("section"))
 answers["section"] = section
 
+# Attempt to load any existing answers once we know identity
+if student_name and section and not answers.get("_loaded_once"):
+    try:
+        r = requests.post(
+            f"{BACKEND}/lab/{lab}/load",
+            json={"student_name": student_name, "section": section},
+            timeout=3,
+        )
+        if r.status_code == 200:
+            loaded = r.json().get("answers", {})
+            # Merge, but don't overwrite anything the student already typed this session
+            for k, v in loaded.items():
+                answers.setdefault(k, v)
+        answers["_loaded_once"] = True
+    except Exception:
+        pass
+
 st.subheader("Lab Fields")
 
 tables: dict[str, pd.DataFrame] = {}

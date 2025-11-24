@@ -1,7 +1,32 @@
 import os
+import re
 import subprocess
 from tempfile import NamedTemporaryFile
 from textwrap import dedent
+
+
+JINJA_PATTERN = re.compile(r"({{.*?}}|{%.+?%})")
+
+
+def _strip_jinja(tex_source: str) -> str:
+  """Remove Jinja-style template constructs from LaTeX before HTML rendering.
+
+  This prevents placeholders like `{{ q1 }}` or `{% for row in ... %}` from
+  leaking into the student-facing HTML instructions. The original LaTeX
+  source should still be used for PDF generation.
+  """
+
+  cleaned_lines = []
+  for line in tex_source.splitlines():
+    if JINJA_PATTERN.search(line):
+      stripped = JINJA_PATTERN.sub("", line).strip()
+      if not stripped:
+        # Whole line was template logic; drop it entirely
+        continue
+      line = stripped
+    cleaned_lines.append(line)
+
+  return "\n".join(cleaned_lines)
 
 
 def latex_to_html(tex_source: str) -> str:
@@ -24,13 +49,16 @@ def latex_to_html(tex_source: str) -> str:
         """
     )
 
-    has_begin = "\\begin{document}" in tex_source
-    has_end = "\\end{document}" in tex_source
+    # For HTML preview, strip out Jinja templating noise first
+    clean_source = _strip_jinja(tex_source)
+
+    has_begin = "\\begin{document}" in clean_source
+    has_end = "\\end{document}" in clean_source
 
     if has_begin:
-        tex_document = tex_source
+        tex_document = clean_source
     else:
-        tex_document = default_preamble + tex_source
+        tex_document = default_preamble + clean_source
 
     if not has_end:
         tex_document += "\n\\end{document}\n"
