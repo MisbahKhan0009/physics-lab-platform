@@ -19,9 +19,9 @@
 \date{}
 \maketitle
 
-\textbf{Student Name:} {{ student_name }}\\
-\textbf{Date:} {{ date }}\\
-\textbf{Lab Section:} {{ section }}\\[1em]
+	extbf{Student Name:} {{ student_name }}\\ % FIELD:student_name:text
+	extbf{Date:} {{ date }}\\ % FIELD:date:text
+	extbf{Lab Section:} {{ section }}\\[1em] % FIELD:section:text
 
 \section*{Introduction}
 
@@ -86,18 +86,19 @@ You will measure the actual (experimental) acceleration using timing data and co
 \section*{Data}
 
 \subsection*{Cart Mass}
-\textbf{Cart mass:} {{ cart.mass }} kg
+	extbf{Cart mass:} {{ cart.mass }} kg % FIELD:cart_mass:text
 
 %========================
 % TRIAL SET 1
 %========================
 
-\subsection*{Trial Set 1: Hanging Mass {{ set1.mh }} kg}
+\subsection*{Trial Set 1: Hanging Mass {{ set1.mh }} kg} % FIELD:set1_mh:text
 
 \begin{center}
-\textbf{Table 1}
+	extbf{Table 1}
 \end{center}
 
+% TABLE:set1_table:columns=d,t,aexp,atheory
 \begin{center}
 \begin{tabular}{cccc}
 \toprule
@@ -117,19 +118,20 @@ You will measure the actual (experimental) acceleration using timing data and co
 
 \vspace{1ex}
 
-\textbf{Example calculation using average values:}\\
+	extbf{Example calculation using average values:}\\ % FIELD:set1_example:textarea
 {{ set1.example_calculation }}
 
 %========================
 % TRIAL SET 2
 %========================
 
-\subsection*{Trial Set 2: Hanging Mass {{ set2.mh }} kg}
+\subsection*{Trial Set 2: Hanging Mass {{ set2.mh }} kg} % FIELD:set2_mh:text
 
 \begin{center}
-\textbf{Table 2}
+	extbf{Table 2}
 \end{center}
 
+% TABLE:set2_table:columns=d,t,aexp,atheory
 \begin{center}
 \begin{tabular}{cccc}
 \toprule
@@ -151,12 +153,13 @@ You will measure the actual (experimental) acceleration using timing data and co
 % TRIAL SET 3
 %========================
 
-\subsection*{Trial Set 3: Hanging Mass {{ set3.mh }} kg}
+\subsection*{Trial Set 3: Hanging Mass {{ set3.mh }} kg} % FIELD:set3_mh:text
 
 \begin{center}
-\textbf{Table 3}
+	extbf{Table 3}
 \end{center}
 
+% TABLE:set3_table:columns=d,t,aexp,atheory
 \begin{center}
 \begin{tabular}{cccc}
 \toprule
@@ -178,19 +181,19 @@ You will measure the actual (experimental) acceleration using timing data and co
 
 \begin{enumerate}[label=\arabic*.]
     \item How does changing the hanging mass affect the net force in the system?\\
-    \textbf{Answer:} {{ q1 }}
+    	extbf{Answer:} {{ q1 }} % FIELD:q1:textarea
 
     \item How does increasing the total mass of the system affect its acceleration?\\
-    \textbf{Answer:} {{ q2 }}
+    	extbf{Answer:} {{ q2 }} % FIELD:q2:textarea
 
     \item Compare the experimental and theoretical accelerations. Were they close? Explain possible differences.\\
-    \textbf{Answer:} {{ q3 }}
+    	extbf{Answer:} {{ q3 }} % FIELD:q3:textarea
 
     \item Identify two sources of experimental error in this setup.\\
-    \textbf{Answer:} {{ q4 }}
+    	extbf{Answer:} {{ q4 }} % FIELD:q4:textarea
 
     \item If friction were not negligible, how would this affect the acceleration? (Increase, decrease, or stay the same. Explain.)\\
-    \textbf{Answer:} {{ q5 }}
+    	extbf{Answer:} {{ q5 }} % FIELD:q5:textarea
 \end{enumerate}
 
 \end{document}
